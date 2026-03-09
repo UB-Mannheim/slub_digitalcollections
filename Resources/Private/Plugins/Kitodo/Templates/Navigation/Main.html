@@ -10,10 +10,11 @@
 -->
 </f:comment>
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <f:comment>Render all navigation features in the given order.</f:comment>
+<f:comment><f:debug>{_all}</f:debug></f:comment>
+<!-- name: slub_digitalcollection: Resources/Private/Plugins/Kitodo/Templates/Navigation/Main.html  -->
 <f:for each="{features}" key="feature" as="enabled">
     <f:if condition="{feature}">
         <f:render section="render.{feature}" arguments="{_all}"/>
@@ -26,16 +27,16 @@
             <f:if condition="{viewData.requestData.double}">
                 <f:then>
                     <div class="tx-dlf-navigation-double">
-                        <kitodo:link viewData="{viewData}" additionalParams="{'double':'0'}" excludedParams="{0: 'measure'}">
+                        <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[double]':'0'}">
                             <f:translate key="doublePageOn"/>
-                        </kitodo:link>
+                        </f:link.action>
                     </div>
                     <div class="tx-dlf-navigation-double+">
                         <f:if condition="{viewData.requestData.double} && ({viewData.requestData.page} < {numPages})">
                             <f:then>
-                                <kitodo:link viewData="{viewData}" additionalParams="{'page':'{viewData.requestData.page + 1}'}" excludedParams="{0: 'measure'}">
+                                <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[page]':'{viewData.requestData.page + 1}'}">
                                     <f:translate key="doublePage+1"/>
-                                </kitodo:link>
+                                </f:link.action>
                             </f:then>
                             <f:else>
                                 <span title="{f:translate(key: 'doublePage+1')}">
@@ -46,9 +47,9 @@
                     </div>
                 </f:then>
                 <f:else>
-                    <kitodo:link viewData="{viewData}" additionalParams="{'double':'1'}" excludedParams="{0: 'measure'}">
+                    <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[double]':'1'}">
                         <f:translate key="doublePageOn"/>
-                    </kitodo:link>
+                    </f:link.action>
                 </f:else>
             </f:if>
         </f:then>
@@ -67,9 +68,9 @@
         <span class="first">
             <f:if condition="{viewData.requestData.page} > 1">
                 <f:then>
-                    <kitodo:link viewData="{viewData}" additionalParams="{'page':'1'}" class="first" excludedParams="{0: 'measure'}">
+                    <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[page]':'1'}" class="first" >
                         <f:translate key="firstPage"/>
-                    </kitodo:link>
+                    </f:link.action>
                 </f:then>
                 <f:else>
                     <span class="first" title="{f:translate(key: 'firstPage')}">
@@ -84,9 +85,9 @@
     <span class="rwnd">
         <f:if condition="{viewData.requestData.page} > {pageSteps}">
             <f:then>
-                <kitodo:link viewData="{viewData}" additionalParams="{'page':'{viewData.requestData.page - pageSteps}'}" excludedParams="{0: 'measure'}">
+                <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[page]':'{viewData.requestData.page - pageSteps}'}">
                     <f:translate key="backXPages" arguments="{0: '{pageSteps}'}"/>
-                </kitodo:link>
+                </f:link.action>
             </f:then>
             <f:else>
                 <span title="{f:translate(key: 'backXPages', arguments: '{0: pageSteps}')}">
@@ -101,9 +102,9 @@
         <span class="prev">
             <f:if condition="{viewData.requestData.page} > {viewData.requestData.double + 1}">
                 <f:then>
-                    <kitodo:link viewData="{viewData}" additionalParams="{'page':'{viewData.requestData.page - 1 - viewData.requestData.double}'}" excludedParams="{0: 'measure'}">
+                    <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[page]':'{viewData.requestData.page - 1 - viewData.requestData.double}'}">
                         <f:translate key="prevPage"/>
-                    </kitodo:link>
+                    </f:link.action>
                 </f:then>
                 <f:else>
                     <span title="{f:translate(key: 'prevPage')}">
@@ -127,9 +128,6 @@
             <f:if condition="{viewData.requestData.double}">
                 <f:form.hidden name="tx_dlf[double]" value="{viewData.requestData.double}"/>
             </f:if>
-            <f:if condition="{viewData.requestData.multiviewembedded} == 1">
-                <f:form.hidden name="tx_dlf[multiviewembedded]" value="{viewData.requestData.multiviewembedded}"/>
-            </f:if>
             <label for="tx-dlf-page-{viewData.uniqueId}">
                 <f:translate key="selectPage"/>
             </label>
@@ -143,14 +141,13 @@
 </f:section>
 
 <f:section name="render.pageForward">
-
     <div class="fwds">
         <span class="next">
             <f:if condition="{viewData.requestData.page + viewData.requestData.double} < {numPages}">
                 <f:then>
-                    <kitodo:link viewData="{viewData}" additionalParams="{'page':'{viewData.requestData.page + 1 + viewData.requestData.double}'}" excludedParams="{0: 'measure'}">
+                    <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[page]':'{viewData.requestData.page + 1 + viewData.requestData.double}'}">
                         <f:translate key="nextPage"/>
-                    </kitodo:link>
+                    </f:link.action>
                 </f:then>
                 <f:else>
                     <span title="{f:translate(key: 'nextPage')}">
@@ -165,9 +162,9 @@
         <span class="fwd">
             <f:if condition="{viewData.requestData.page} <= {numPages - pageSteps}">
                 <f:then>
-                    <kitodo:link viewData="{viewData}" additionalParams="{'page':'{viewData.requestData.page + pageSteps}'}" excludedParams="{0: 'measure'}">
+                    <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[page]':'{viewData.requestData.page + pageSteps}'}">
                         <f:translate key="forwardXPages" arguments="{0: '{pageSteps}'}"/>
-                    </kitodo:link>
+                    </f:link.action>
                 </f:then>
                 <f:else>
                     <span title="{f:translate(key: 'forwardXPages', arguments: '{0: pageSteps}')}">
@@ -182,12 +179,12 @@
         <span class="last">
             <f:if condition="{viewData.requestData.page} < {numPages - viewData.requestData.double}">
                 <f:then>
-                    <kitodo:link viewData="{viewData}" additionalParams="{'page':'{numPages - viewData.requestData.double}'}" excludedParams="{0: 'measure'}">
+                    <f:link.action addQueryString="1" addQueryStringMethod="GET" additionalParams="{'tx_dlf[page]':'{numPages - viewData.requestData.double}'}">
                         <f:translate key="lastPage"/>
-                    </kitodo:link>
+                    </f:link.action>
                 </f:then>
                 <f:else>
-                    <span title="{f:translate(key: 'lastPage')}">
+                    <span title="{f:translate(key: 'lastPage'}">
                         <f:translate key="lastPage"/>
                     </span>
                 </f:else>
@@ -212,8 +209,6 @@
         <a href="#" class="out" title="{f:translate(key: 'zoomOut')}" onclick="tx_dlf_viewer.map.zoomOut();">
             <f:translate key="zoomOut"/>
         </a>
-    </li>
-    <li class="fullscreen">
         <a href="#" class="fullscreen" title="{f:translate(key: 'zoomFullscreen')}">
             <f:translate key="zoomFullscreen"/>
         </a>
@@ -221,7 +216,7 @@
 </f:section>
 
 <f:section name="render.rotation">
-     <li class="rotate">
+    <li class="rotate">
         <a href="#" class="rotate-left" title="{f:translate(key: 'rotateLeft')}" onclick="tx_dlf_viewer.map.rotateLeft();">
             <f:translate key="rotateLeft"/>
         </a>
@@ -233,62 +228,4 @@
         </a>
     </li>
 </f:section>
-
-<f:section name="render.measureBack">
-    <f:if condition="{numMeasures} > 0 && {double} != 1">
-        <f:then>
-            <div class="measureBacks">
-                <span class="prev">
-                    <f:if condition="{currentMeasure} > 1">
-                        <f:then>
-                            <f:variable name="prevMeasure" value="{currentMeasure - 1}" />
-                            <kitodo:link viewData="{viewData}" additionalParams="{'measure':'{currentMeasure - 1}', 'page':'{measurePages.{prevMeasure}}'}">
-                                <f:translate key="prevMeasure"/>
-                            </kitodo:link>
-                        </f:then>
-                        <f:else>
-                            <span title="{f:translate(key: 'prevPage')}">
-                                <f:translate key="prevMeasure"/>
-                            </span>
-                        </f:else>
-                    </f:if>
-                </span>
-            </div>
-        </f:then>
-    </f:if>
-</f:section>
-
-<f:section name="render.measureForward">
-    <f:if condition="{numMeasures} > 0 && {double} != 1">
-        <f:then>
-            <div class="measureFwds">
-                <span class="next">
-                    <f:if condition="{currentMeasure} < {numMeasures}">
-                        <f:then>
-                            <f:if condition="{currentMeasure} > 0">
-                                <f:then>
-                                    <f:variable name="nextMeasure" value="{currentMeasure + 1}" />
-                                    <kitodo:link viewData="{viewData}" additionalParams="{'measure':'{currentMeasure + 1}', 'page':'{measurePages.{nextMeasure}}'}">
-                                        <f:translate key="nextMeasure"/>
-                                    </kitodo:link>
-                                </f:then>
-                                <f:else>
-                                    <kitodo:link viewData="{viewData}" additionalParams="{'measure':'1', 'page':'{measurePages.1}'}">
-                                        <f:translate key="nextMeasure"/>
-                                    </kitodo:link>
-                                </f:else>
-                            </f:if>
-                        </f:then>
-                        <f:else>
-                            <span title="{f:translate(key: 'nextMeasure')}">
-                                <f:translate key="nextMeasure"/>
-                            </span>
-                        </f:else>
-                    </f:if>
-                </span>
-            </div>
-        </f:then>
-    </f:if>
-</f:section>
-
 </html>
