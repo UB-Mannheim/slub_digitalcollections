@@ -7,8 +7,8 @@ module.exports = function(grunt) {
             development: {
                 options: {
                     sourceMap: true,
-                    compress: true,
-                    yuicompress: true,
+                    compress: false,
+                    yuicompress: false,
                     optimization: 2
                 },
                 files: {
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         terser: {
             development: {
                 options: {
-                    compress: true,
+                    compress: false,
                     output: {
                         comments: false
                     }
