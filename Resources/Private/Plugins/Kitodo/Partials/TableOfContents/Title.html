@@ -20,7 +20,10 @@
         </f:then>
         <f:else>
             <span class="meta-type-icon meta-type-{child.type}">{child.translatedType}</span>
+            <f:comment>fix: avoid duplicate output, unless it is a volume</f:comment>
+            <f:if condition="{child.volume}">
             <f:format.crop maxCharacters="55" append="&nbsp;..."><f:format.htmlspecialchars doubleEncode="false">{child.translatedType}</f:format.htmlspecialchars><f:if condition="{child.volume}"> &nbsp;<f:format.htmlspecialchars doubleEncode="false">{child.volume}</f:format.htmlspecialchars></f:if></f:format.crop>
+            </f:if>
         </f:else>
     </f:if>
 </span>
