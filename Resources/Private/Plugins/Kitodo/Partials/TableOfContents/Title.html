@@ -37,6 +37,12 @@
         <span class="pagination"><f:format.htmlspecialchars doubleEncode="false">{child.pagination}</f:format.htmlspecialchars></span>
     </f:then>
     <f:else>
-        <span class="pagination">-</span>
+        <f:if condition="{child.orderlabel}">
+            <f:then></f:then>
+                <span class="pagination"></span>
+            <f:else>
+                <span class="pagination">-</span>
+            </f:else>
+        </f:if>
     </f:else>
 </f:if>
