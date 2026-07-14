@@ -22,7 +22,7 @@
 <f:alias map="{logoUrl: '{providerLogoXpath}', logoTitle: '{providerXpath}',
         logoUri: '{providerSiteUrlXpath}'}">
     <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-        <li>
+        <li class="{provider}Logo">
             <f:link.external uri="{logoUri}" title="{logoTitle}">
                 <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}" width="108" title="{logoTitle}" alt="Logo von {logoTitle}" />
             </f:link.external>
