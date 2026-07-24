@@ -18,7 +18,9 @@
     <div class="tx-dlf-toolbox-searchindocument">
         <div class="tx-dlf-toolbox-searchindocument-search-toggle"></div>
         <f:if condition="{f:cObject(typoscriptObjectPath:'plugin.tx_dlf_searchindocumenttool')}">
-            <f:cObject typoscriptObjectPath="plugin.tx_dlf_searchindocumenttool" />
+            <ul>
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_searchindocumenttool" />
+            </ul>
         </f:if>
     </div>
     <div id="tx-dlf-toolbox-fulltext-selection"></div>
