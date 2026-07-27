@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         less: {
             development: {
                 options: {
-                    sourceMap: true,
+                    sourceMap: false,
                     compress: false,
                     yuicompress: false,
                     optimization: 2
