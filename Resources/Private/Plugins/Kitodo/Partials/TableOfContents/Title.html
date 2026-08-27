@@ -30,18 +30,25 @@
     </f:if>
 </span>
 
+<f:if condition="{child.type} == 'multivolume_work' || {child.type} == 'volume' || {child.type} == 'periodical' || {child.type} == 'newspaper' || {child.type} == 'month' || {child.type} == 'issue'">
+    <f:then>
+        <span class="pagination slub_35 {child.type}"></span>
+    </f:then>
+    <f:else>
 <f:if condition="{child.pagination}">
     <f:then>
-        <span class="pagination"><f:format.htmlspecialchars doubleEncode="false">{child.pagination}</f:format.htmlspecialchars></span>
+        <span class="pagination slub_40 {child.type}"><f:format.htmlspecialchars doubleEncode="false">{child.pagination}</f:format.htmlspecialchars></span>
     </f:then>
     <f:else>
         <f:if condition="{child.orderlabel}">
             <f:then>
-                <span class="pagination"></span>
+                <span class="pagination slub_45 {child.type}"></span>
             </f:then>
             <f:else>
-                <span class="pagination">-</span>
+                <span class="pagination slub_48 {child.type}">-</span>
             </f:else>
         </f:if>
+    </f:else>
+</f:if>
     </f:else>
 </f:if>
