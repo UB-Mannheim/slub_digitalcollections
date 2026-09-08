@@ -98,6 +98,9 @@ class XpathViewHelper extends AbstractViewHelper
         $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(static::class);
 
         $mets = $currentDocument->getMets();
+        if ($mets === null) {
+            return;
+        }
         $mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
         $mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
         $mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
