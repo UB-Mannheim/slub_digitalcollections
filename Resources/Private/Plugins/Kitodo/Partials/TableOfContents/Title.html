@@ -18,7 +18,7 @@
     <f:if condition="{child.title}">
         <f:then>
             <f:comment>Title exists</f:comment>
-            <f:if condition="{child.type} == 'monograph' || {child.type} == 'periodical' || {child.type} == 'volume' || {child.type} == 'newspaper'">
+            <f:if condition="{child.type} == 'monograph' || {child.type} == 'periodical' || {child.type} == 'volume' || {child.type} == 'newspaper' || {child.type} == 'multivolume_work'">
                 <f:then>
                     <f:variable name="cShow" value="show" />
                 </f:then>
