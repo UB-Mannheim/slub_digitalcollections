@@ -18,7 +18,16 @@
     <f:if condition="{child.title}">
         <f:then>
             <f:comment>Title exists</f:comment>
-            <span class="meta-type-icon meta-type-{child.type} noshow slub20 withElementTitle">{child.translatedType}</span>
+            <f:if condition="{child.type} == 'monograph' || {child.type} == 'periodical' || {child.type} == 'volume' || {child.type} == 'newspaper'">
+                <f:then>
+                    <f:variable name="cShow" value="show" />
+                </f:then>
+                <f:else>
+                    <f:variable name="cShow" value="noshow" />
+                </f:else>
+            </f:if>
+            <!-- default was orignaly here "noshow" -->
+            <span class="meta-type-icon meta-type-{child.type} {cShow} slub20 withElementTitle">{child.translatedType}</span>
             <f:format.crop maxCharacters="55" append="&nbsp;..."><f:format.htmlspecialchars doubleEncode="false">{child.title}</f:format.htmlspecialchars></f:format.crop>
         </f:then>
         <f:else>
